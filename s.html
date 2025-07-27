@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Arapey&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arapey', serif;
+            background: #ffffff;
+            color: #000;
+            overflow-x: hidden;
+            font-size: 1.1rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.6rem;
+        }
+
+        .menu-button {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-button {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            /* ✅ Fixed width to prevent resizing */
+            text-align: center;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            /* translucent white */
+            border-radius: 999px;
+            padding: 8px 10px;
+            backdrop-filter: blur(12px);
+            /* ✅ blur effect */
+            -webkit-backdrop-filter: blur(12px);
+            /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            /* soft border */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: row;
+            gap: 16px;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+
+        .dropdown-menu.show {
+            display: flex;
+        }
+
+        .dropdown-item {
+            border: none;
+            background: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .dropdown-item.active {
+            color: #000;
+        }
+
+        .dropdown-item:hover {
+            color: #000;
+        }
+
+
+
+        .hire-button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .intro {
+            background: #e0e0e049;
+            text-align: center;
+            margin: 10px auto;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .intro img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .intro h2 {
+            margin-top: 10px;
+            font-weight: normal;
+            font-size: 1.5rem;
+        }
+
+        .intro .highlight {
+            font-weight: bold;
+        }
+
+        .call-button {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: none;
+            background: #000;
+            color: #fff;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 8px;
+        }
+
+        .filter-buttons button {
+            padding: 8px 8px;
+            border-radius: 999px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0.5;
+            transition: background-color 0.4s ease, color 0.4s ease, opacity 0.2s ease;
+        }
+
+        .filter-buttons button:hover {
+            background-color: #e0e0e049;
+            color: #000000;
+            opacity: 1;
+            border: 0px solid #ffffff00;
+        }
+
+        .filter-buttons .active {
+            background-color: #e0e0e049;
+            color: #000000;
+            opacity: 1;
+            border: 0px solid #ffffff00;
+        }
+
+
+
+        .carousel {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .carousel-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .projects-container {
+            display: flex;
+            overflow: hidden;
+            scroll-behavior: smooth;
+            width: 625px;
+            height: 416px;
+        }
+
+        .project {
+            flex: 0 0 100%;
+            width: 625px;
+            height: 416px;
+            position: relative;
+        }
+
+        .project img {
+            width: 625px;
+            height: 416px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: 0.3s ease;
+            z-index: 2;
+        }
+
+        .scroll-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .scroll-btn:first-of-type {
+            left: 10px;
+        }
+
+        .scroll-btn:last-of-type {
+            right: 10px;
+        }
+
+        footer {
+            margin-top: 50px;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 10px 10px;
+
+            color: #555;
+            font-size: 0.85rem;
+            line-height: 1.2;
+        }
+
+        .footer-icons {
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-icons a {
+            color: #b8b4b4;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-icons a:hover {
+            color: #000;
+        }
+
+        .footer-name {
+            font-family: 'Arapey', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #b8b4b4;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Husaini.™</div>
+        <div class="menu-wrapper">
+            <button class="menu-button" id="menuToggle">Menu +</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <button class="dropdown-item active">Portfolio</button>
+                <button class="dropdown-item">About</button>
+                <button class="dropdown-item">Journal</button>
+            </div>
+        </div>
+        <button class="hire-button">About</button>
+    </header>
+
+    <section class="intro">
+        <img src="me2.jpg" alt="Profile Picture" />
+        <div style="font-size: 28px; line-height: 1; text-align: center;">
+            <span style="color: gray;">Hi! I'm Husaini.</span><br>
+            <span>welcome to my work!</span>
+        </div>
+        <button class="call-button">Contact Me</button>
+    </section>
+
+
+
+
+    <div class="filter-buttons">
+        <button class="active">All projects</button>
+        <button>Website</button>
+        <button>Design</button>
+        <button>Game Dev</button>
+        <button>Blender</button>
+    </div>
+
+    <div class="carousel">
+        <div class="carousel-row">
+            <button class="scroll-btn" onclick="scrollRow('row1', -1)">&lt;</button>
+            <div class="projects-container" id="row1">
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+            </div>
+            <button class="scroll-btn" onclick="scrollRow('row1', 1)">&gt;</button>
+        </div>
+
+        <div class="carousel-row">
+            <button class="scroll-btn" onclick="scrollRow('row2', -1)">&lt;</button>
+            <div class="projects-container" id="row2">
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+            </div>
+            <button class="scroll-btn" onclick="scrollRow('row2', 1)">&gt;</button>
+        </div>
+        
+        <div class="carousel-row">
+            <button class="scroll-btn" onclick="scrollRow('row3', -1)">&lt;</button>
+            <div class="projects-container" id="row2">
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+            </div>
+            <button class="scroll-btn" onclick="scrollRow('row3', 1)">&gt;</button>
+        </div>
+
+        <div class="carousel-row">
+            <button class="scroll-btn" onclick="scrollRow('row4', -1)">&lt;</button>
+            <div class="projects-container" id="row2">
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+                <div class="project">
+                    <img src="ponyo.jpg" alt="Project Thumbnail" />
+                </div>
+            </div>
+            <button class="scroll-btn" onclick="scrollRow('row4', 1)">&gt;</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-icons">
+            <a href="https://www.linkedin.com/in/husainishaffin/" target="_blank" aria-label="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/mt.sanii/" target="_blank" aria-label="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="mailto:ahmadshaffin@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+        </div>
+        <div class="footer-name">© 2025 Husaini.</div>
+    </footer>
+
+
+
+
+
+    <!-- Font Awesome CDN (for the icons) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+    <script>
+        function scrollRow(id, direction) {
+            const container = document.getElementById(id);
+            const items = container.children.length;
+            const itemWidth = container.offsetWidth;
+            const scrollLeft = container.scrollLeft;
+            const maxScroll = itemWidth * (items - 1);
+
+            if (direction === 1 && scrollLeft >= maxScroll) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else if (direction === -1 && scrollLeft <= 0) {
+                container.scrollTo({ left: maxScroll, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuButton = document.getElementById("menuToggle");
+            const dropdown = document.getElementById("dropdownMenu");
+
+            menuButton.addEventListener("click", function () {
+                dropdown.classList.toggle("show");
+                menuButton.textContent = dropdown.classList.contains("show") ? "Menu x" : "Menu +";
+            });
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

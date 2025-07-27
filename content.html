@@ -1,0 +1,773 @@
+<div class="carousel-row">
+    <button class="scroll-btn" onclick="scrollRow('row2', -1)">‹</button>
+    <div class="projects-container" id="row2">
+        <div class="project" onclick="openProject('brand-identity-design')">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop"
+                alt="Project Thumbnail" />
+            <div class="project-title">Brand Identity Design</div>
+        </div>
+        <div class="project" onclick="openProject('ui-ux-interface')">
+            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=600&fit=crop"
+                alt="Project Thumbnail" />
+            <div class="project-title">UI/UX Interface</div>
+        </div>
+        <div class="project" onclick="openProject('mobile-app-design')">
+            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop"
+                alt="Project Thumbnail" />
+            <div<!DOCTYPE html>
+                <html lang="en">
+
+                <head>
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>Portfolio</title>
+                    <link rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+                        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer" />
+                    <link href="https://fonts.googleapis.com/css2?family=Arapey:ital,wght@0,400;1,400&display=swap"
+                        rel="stylesheet">
+
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+
+                        body {
+                            font-family: 'Arapey', serif;
+                            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                            color: #000;
+                            overflow-x: hidden;
+                            font-size: 1.1rem;
+                            line-height: 1.6;
+                        }
+
+                        /* Enhanced Header */
+                        header {
+                            position: sticky;
+                            top: 0;
+                            z-index: 100;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 25px 50px;
+                            background: rgba(255, 255, 255, 0.95);
+                            backdrop-filter: blur(20px);
+                            -webkit-backdrop-filter: blur(20px);
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        }
+
+                        .logo {
+                            font-weight: bold;
+                            font-size: 1.8rem;
+                            background: linear-gradient(135deg, #000 0%, #333 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            transition: transform 0.3s ease;
+                        }
+
+                        .logo:hover {
+                            transform: scale(1.05);
+                        }
+
+                        .menu-wrapper {
+                            position: relative;
+                            display: inline-block;
+                        }
+
+                        .menu-button {
+                            background: rgba(255, 255, 255, 0.9);
+                            color: #000000;
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            padding: 14px 28px;
+                            border-radius: 50px;
+                            cursor: pointer;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+                            width: 130px;
+                            text-align: center;
+                            transition: all 0.3s ease;
+                            backdrop-filter: blur(10px);
+                        }
+
+                        .menu-button:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+                            background: rgba(255, 255, 255, 1);
+                        }
+
+                        .dropdown-menu {
+                            position: absolute;
+                            top: calc(100% + 12px);
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(255, 255, 255, 0.95);
+                            border-radius: 25px;
+                            padding: 12px 16px;
+                            backdrop-filter: blur(20px);
+                            -webkit-backdrop-filter: blur(20px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                            display: none;
+                            flex-direction: row;
+                            gap: 20px;
+                            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                            z-index: 99;
+                            opacity: 0;
+                            transform: translateX(-50%) translateY(-10px);
+                        }
+
+                        .dropdown-menu.show {
+                            display: flex;
+                            opacity: 1;
+                            transform: translateX(-50%) translateY(0);
+                        }
+
+                        .dropdown-item {
+                            border: none;
+                            background: none;
+                            font-weight: 600;
+                            font-size: 1.1rem;
+                            color: #666;
+                            cursor: pointer;
+                            padding: 8px 16px;
+                            border-radius: 15px;
+                            transition: all 0.3s ease;
+                        }
+
+                        .dropdown-item.active {
+                            color: #000;
+                            background: rgba(0, 0, 0, 0.05);
+                        }
+
+                        .dropdown-item:hover {
+                            color: #000;
+                            background: rgba(0, 0, 0, 0.05);
+                            transform: translateY(-1px);
+                        }
+
+                        .hire-button {
+                            background: linear-gradient(135deg, #000 0%, #333 100%);
+                            color: #fff;
+                            border: none;
+                            padding: 14px 28px;
+                            border-radius: 50px;
+                            cursor: pointer;
+                            font-size: 1.1rem;
+                            font-weight: 600;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                        }
+
+                        .hire-button:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+                            background: linear-gradient(135deg, #333 0%, #000 100%);
+                        }
+
+                        /* Enhanced Intro Section */
+                        .intro {
+                            background: rgba(224, 224, 224, 0.15);
+                            text-align: center;
+                            margin: 30px auto;
+                            padding: 50px 30px;
+                            border-radius: 30px;
+                            width: 90%;
+                            max-width: 650px;
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+                            transition: all 0.3s ease;
+                        }
+
+                        .intro:hover {
+                            transform: translateY(-5px);
+                            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .profile-image-container {
+                            position: relative;
+                            display: inline-block;
+                            margin-bottom: 20px;
+                        }
+
+                        .intro img {
+                            width: 120px;
+                            height: 120px;
+                            border-radius: 50%;
+                            border: 4px solid rgba(255, 255, 255, 0.8);
+                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                            transition: all 0.3s ease;
+                        }
+
+                        .intro img:hover {
+                            transform: scale(1.05);
+                            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+                        }
+
+                        .intro-text {
+                            font-size: 32px;
+                            line-height: 1.2;
+                            text-align: center;
+                            margin-bottom: 25px;
+                        }
+
+                        .intro-text .greeting {
+                            color: #666;
+                            font-weight: 400;
+                        }
+
+                        .intro-text .welcome {
+                            font-weight: 600;
+                            background: linear-gradient(135deg, #000 0%, #333 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                        }
+
+                        .call-button {
+                            margin-top: 20px;
+                            padding: 16px 32px;
+                            border: none;
+                            background: linear-gradient(135deg, #000 0%, #333 100%);
+                            color: #fff;
+                            border-radius: 50px;
+                            cursor: pointer;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                        }
+
+                        .call-button:hover {
+                            transform: translateY(-3px);
+                            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+                            background: linear-gradient(135deg, #333 0%, #000 100%);
+                        }
+
+                        /* Enhanced Filter Buttons */
+                        .filter-buttons {
+                            display: flex;
+                            justify-content: center;
+                            margin: 50px 0;
+                            gap: 12px;
+                            flex-wrap: wrap;
+                        }
+
+                        .filter-buttons button {
+                            padding: 12px 24px;
+                            border-radius: 25px;
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            background: rgba(255, 255, 255, 0.9);
+                            cursor: pointer;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            opacity: 0.6;
+                            transition: all 0.3s ease;
+                            backdrop-filter: blur(10px);
+                        }
+
+                        .filter-buttons button:hover {
+                            background: rgba(224, 224, 224, 0.3);
+                            color: #000000;
+                            opacity: 1;
+                            transform: translateY(-2px);
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .filter-buttons .active {
+                            background: rgba(224, 224, 224, 0.4);
+                            color: #000000;
+                            opacity: 1;
+                            border: 1px solid rgba(0, 0, 0, 0.15);
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                        }
+
+                        /* Enhanced Carousel */
+                        .carousel {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 60px;
+                            align-items: center;
+                            padding: 0 20px;
+                        }
+
+                        .carousel-row {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            max-width: 100%;
+                        }
+
+                        .projects-container {
+                            display: flex;
+                            overflow: hidden;
+                            scroll-behavior: smooth;
+                            width: 650px;
+                            height: 430px;
+                            border-radius: 20px;
+                            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .project {
+                            flex: 0 0 100%;
+                            width: 650px;
+                            height: 430px;
+                            position: relative;
+                            overflow: hidden;
+                            cursor: pointer;
+                        }
+
+                        .project img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 20px;
+                            transition: all 0.5s ease;
+                        }
+
+                        .project:hover img {
+                            transform: scale(1.05);
+                        }
+
+                        .project-title {
+                            position: absolute;
+                            top: 25px;
+                            left: 25px;
+                            right: 25px;
+                            background: rgba(255, 255, 255, 0.95);
+                            color: #000;
+                            padding: 12px 20px;
+                            border-radius: 15px;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                            backdrop-filter: blur(15px);
+                            -webkit-backdrop-filter: blur(15px);
+                            border: 1px solid rgba(255, 255, 255, 0.3);
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            transition: all 0.4s ease;
+                            opacity: 0;
+                            transform: translateY(-10px);
+                            z-index: 5;
+                        }
+
+                        .project:hover .project-title {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+
+                        .project::after {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            border-radius: 20px;
+                        }
+
+                        .project:hover::after {
+                            opacity: 1;
+                        }
+
+                        .scroll-btn {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background: rgba(255, 255, 255, 0.95);
+                            color: #000;
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            border-radius: 50%;
+                            width: 45px;
+                            height: 45px;
+                            font-size: 1.3rem;
+                            font-weight: bold;
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            z-index: 10;
+                            backdrop-filter: blur(10px);
+                        }
+
+                        .scroll-btn:hover {
+                            background: rgba(255, 255, 255, 1);
+                            transform: translateY(-50%) scale(1.1);
+                            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+                        }
+
+                        .scroll-btn:first-of-type {
+                            left: -25px;
+                        }
+
+                        .scroll-btn:last-of-type {
+                            right: -25px;
+                        }
+
+                        /* Enhanced Footer */
+                        footer {
+                            margin-top: 80px;
+                            margin-bottom: 20px;
+                            text-align: center;
+                            padding: 40px 20px;
+                            background: rgba(248, 249, 250, 0.5);
+                            border-radius: 30px;
+                            margin-left: 20px;
+                            margin-right: 20px;
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                        }
+
+                        .footer-icons {
+                            margin-bottom: 20px;
+                            font-size: 1.6rem;
+                            display: flex;
+                            justify-content: center;
+                            gap: 20px;
+                            flex-wrap: wrap;
+                        }
+
+                        .footer-icons a {
+                            color: #999;
+                            text-decoration: none;
+                            transition: all 0.3s ease;
+                            padding: 12px;
+                            border-radius: 50%;
+                            background: rgba(255, 255, 255, 0.5);
+                            width: 50px;
+                            height: 50px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .footer-icons a:hover {
+                            color: #000;
+                            background: rgba(255, 255, 255, 1);
+                            transform: translateY(-3px);
+                            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .footer-name {
+                            font-family: 'Arapey', serif;
+                            font-size: 1.4rem;
+                            font-weight: 600;
+                            color: #666;
+                            margin-top: 10px;
+                        }
+
+                        /* Smooth scroll animations */
+                        @keyframes fadeInUp {
+                            from {
+                                opacity: 0;
+                                transform: translateY(30px);
+                            }
+
+                            to {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        }
+
+                        .intro,
+                        .filter-buttons,
+                        .carousel-row {
+                            animation: fadeInUp 0.8s ease-out;
+                        }
+
+                        .carousel-row:nth-child(2) {
+                            animation-delay: 0.1s;
+                        }
+
+                        .carousel-row:nth-child(3) {
+                            animation-delay: 0.2s;
+                        }
+
+                        .carousel-row:nth-child(4) {
+                            animation-delay: 0.3s;
+                        }
+
+                        .carousel-row:nth-child(5) {
+                            animation-delay: 0.4s;
+                        }
+
+                        /* Responsive Design */
+                        @media (max-width: 768px) {
+                            header {
+                                padding: 20px 25px;
+                                flex-wrap: wrap;
+                                gap: 15px;
+                            }
+
+                            .logo {
+                                font-size: 1.5rem;
+                            }
+
+                            .menu-button,
+                            .hire-button {
+                                padding: 12px 20px;
+                                font-size: 1rem;
+                            }
+
+                            .intro {
+                                width: 95%;
+                                padding: 40px 25px;
+                                margin: 20px auto;
+                            }
+
+                            .intro-text {
+                                font-size: 24px;
+                            }
+
+                            .projects-container {
+                                width: 90vw;
+                                max-width: 500px;
+                                height: 300px;
+                            }
+
+                            .project {
+                                width: 90vw;
+                                max-width: 500px;
+                                height: 300px;
+                            }
+
+                            .scroll-btn {
+                                width: 40px;
+                                height: 40px;
+                                font-size: 1.1rem;
+                            }
+
+                            .filter-buttons {
+                                gap: 8px;
+                                margin: 30px 0;
+                            }
+
+                            .project-title {
+                                font-size: 1rem;
+                                padding: 10px 16px;
+                                top: 20px;
+                                left: 20px;
+                                right: 20px;
+                            }
+
+                            .carousel {
+                                gap: 40px;
+                            }
+                        }
+                    </style>
+                </head>
+
+                <body>
+                    <header>
+                        <div class="logo">Husaini.™</div>
+                        <div class="menu-wrapper">
+                            <button class="menu-button" id="menuToggle">Menu +</button>
+                            <div class="dropdown-menu" id="dropdownMenu">
+                                <button class="dropdown-item active">Portfolio</button>
+                                <button class="dropdown-item">About</button>
+                                <button class="dropdown-item">Journal</button>
+                            </div>
+                        </div>
+                        <button class="hire-button">About</button>
+                    </header>
+
+                    <section class="intro">
+                        <div class="profile-image-container">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+                                alt="Profile Picture" />
+                        </div>
+                        <div class="intro-text">
+                            <span class="greeting">Hi! I'm Husaini.</span><br>
+                            <span class="welcome">welcome to my work!</span>
+                        </div>
+                        <button class="call-button">Contact Me</button>
+                    </section>
+
+                    <div class="filter-buttons">
+                        <button class="active">All projects</button>
+                        <button>Website</button>
+                        <button>Design</button>
+                        <button>Game Dev</button>
+                        <button>Blender</button>
+                    </div>
+
+                    <div class="carousel">
+                        <div class="carousel-row">
+                            <button class="scroll-btn" onclick="scrollRow('row1', -1)">‹</button>
+                            <div class="projects-container" id="row1">
+                                <div class="project" onclick="openProject('ecommerce-dashboard')">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">E-Commerce Dashboard</div>
+                                </div>
+                                <div class="project" onclick="openProject('web-development-studio')">
+                                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Web Development Studio</div>
+                                </div>
+                                <div class="project" onclick="openProject('coding-solutions-app')">
+                                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Coding Solutions App</div>
+                                </div>
+                            </div>
+                            <button class="scroll-btn" onclick="scrollRow('row1', 1)">›</button>
+                        </div>
+
+                        <div class="carousel-row">
+                            <button class="scroll-btn" onclick="scrollRow('row2', -1)">‹</button>
+                            <div class="projects-container" id="row2">
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Brand Identity Design</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">UI/UX Interface</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Mobile App Design</div>
+                                </div>
+                            </div>
+                            <button class="scroll-btn" onclick="scrollRow('row2', 1)">›</button>
+                        </div>
+
+                        <div class="carousel-row">
+                            <button class="scroll-btn" onclick="scrollRow('row3', -1)">‹</button>
+                            <div class="projects-container" id="row3">
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Adventure Game RPG</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Indie Game Studio</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">VR Gaming Experience</div>
+                                </div>
+                            </div>
+                            <button class="scroll-btn" onclick="scrollRow('row3', 1)">›</button>
+                        </div>
+
+                        <div class="carousel-row">
+                            <button class="scroll-btn" onclick="scrollRow('row4', -1)">‹</button>
+                            <div class="projects-container" id="row4">
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">3D Architecture Render</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Product Visualization</div>
+                                </div>
+                                <div class="project">
+                                    <img src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=800&h=600&fit=crop"
+                                        alt="Project Thumbnail" />
+                                    <div class="project-title">Character Animation</div>
+                                </div>
+                            </div>
+                            <button class="scroll-btn" onclick="scrollRow('row4', 1)">›</button>
+                        </div>
+                    </div>
+
+                    <footer>
+                        <div class="footer-icons">
+                            <a href="https://www.linkedin.com/in/husainishaffin/" target="_blank" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://www.instagram.com/mt.sanii/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="mailto:ahmadshaffin@gmail.com" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" aria-label="Website">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
+                        <div class="footer-name">© 2025 Husaini.</div>
+                    </footer>
+
+                    <script>
+                        function scrollRow(id, direction) {
+                            const container = document.getElementById(id);
+                            const items = container.children.length;
+                            const itemWidth = container.offsetWidth;
+                            const scrollLeft = container.scrollLeft;
+                            const maxScroll = itemWidth * (items - 1);
+
+                            if (direction === 1 && scrollLeft >= maxScroll) {
+                                container.scrollTo({ left: 0, behavior: 'smooth' });
+                            } else if (direction === -1 && scrollLeft <= 0) {
+                                container.scrollTo({ left: maxScroll, behavior: 'smooth' });
+                            } else {
+                                container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+                            }
+                        }
+
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const menuButton = document.getElementById("menuToggle");
+                            const dropdown = document.getElementById("dropdownMenu");
+
+                            menuButton.addEventListener("click", function () {
+                                dropdown.classList.toggle("show");
+                                menuButton.textContent = dropdown.classList.contains("show") ? "Menu ×" : "Menu +";
+                            });
+
+                            // Close dropdown when clicking outside
+                            document.addEventListener("click", function (event) {
+                                if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+                                    dropdown.classList.remove("show");
+                                    menuButton.textContent = "Menu +";
+                                }
+                            });
+
+                            // Filter functionality
+                            const filterButtons = document.querySelectorAll('.filter-buttons button');
+                            filterButtons.forEach(button => {
+                                button.addEventListener('click', function () {
+                                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                                    this.classList.add('active');
+                                });
+                            });
+
+                            // Smooth scroll behavior for header
+                            let lastScrollY = window.scrollY;
+                            const header = document.querySelector('header');
+
+                            window.addEventListener('scroll', () => {
+                                const currentScrollY = window.scrollY;
+
+                                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                                    header.style.transform = 'translateY(-100%)';
+                                } else {
+                                    header.style.transform = 'translateY(0)';
+                                }
+
+                                lastScrollY = currentScrollY;
+                            });
+                        });
+                    </script>
+                </body>
+
+                </html>
