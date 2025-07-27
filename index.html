@@ -105,9 +105,9 @@
         }
 
         .dropdown-menu.show {
-            display: flex;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+                display: flex;
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
         }
 
         .dropdown-item {
@@ -516,11 +516,11 @@
                 height: 300px;
             }
 
-            .project {
-                width: 90vw;
-                max-width: 500px;
-                height: 300px;
-            }
+                .project {
+                    width: 90vw;
+                    max-width: 500px;
+                    height: 300px;
+                }
 
             .scroll-btn {
                 width: 40px;
@@ -564,7 +564,7 @@
 
     <section class="intro">
         <div class="profile-image-container">
-            <img src="me1.jpg"
+            <img src="img/me1.jpg"
                 alt="Profile Picture" />
         </div>
         <div class="intro-text">
@@ -582,24 +582,23 @@
         <button>Blender</button>
     </div>
 
-    <div class="carousel">
+    <div class="carousel" >
         <div class="carousel-row">
             <button class="scroll-btn" onclick="scrollRow('row1', -1)">‹</button>
-            <div class="projects-container" id="row1">
+            <div class="projects-container" id="row1" onclick="redirectToPage('content.html')">
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+                    <img src="img/mobile1.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">E-Commerce Dashboard</div>
+                    <div class="project-title">Exercise Tracker with Pose Estimation</div>
                 </div>
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop"
+                    <img src="img/mobile2.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Web Development Studio</div>
+                    
                 </div>
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop"
+                    <img src="img/mobilr4.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Coding Solutions App</div>
                 </div>
             </div>
             <button class="scroll-btn" onclick="scrollRow('row1', 1)">›</button>
@@ -609,19 +608,17 @@
             <button class="scroll-btn" onclick="scrollRow('row2', -1)">‹</button>
             <div class="projects-container" id="row2">
                 <div class="project">
-                    <img src="ponyo.jpg"
+                    <img src="img/godot1.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Brand Identity Design</div>
+                    <div class="project-title">Godot Escape Room, Point and Click Game</div>
                 </div>
                 <div class="project">
-                    <img src="ponyo.jpg"
+                    <img src="img/godot2.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">UI/UX Interface</div>
                 </div>
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop"
+                    <img src="img/godot3.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Mobile App Design</div>
                 </div>
             </div>
             <button class="scroll-btn" onclick="scrollRow('row2', 1)">›</button>
@@ -631,20 +628,15 @@
             <button class="scroll-btn" onclick="scrollRow('row3', -1)">‹</button>
             <div class="projects-container" id="row3">
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop"
+                    <img src="img/hasghingPython.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Adventure Game RPG</div>
+                    <div class="project-title">Hashing Demonstration App</div>
                 </div>
                 <div class="project">
-                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=800&h=600&fit=crop"
+                    <img src="img/hashing2.png"
                         alt="Project Thumbnail" />
-                    <div class="project-title">Indie Game Studio</div>
                 </div>
-                <div class="project">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop"
-                        alt="Project Thumbnail" />
-                    <div class="project-title">VR Gaming Experience</div>
-                </div>
+
             </div>
             <button class="scroll-btn" onclick="scrollRow('row3', 1)">›</button>
         </div>
@@ -749,6 +741,12 @@
                 lastScrollY = currentScrollY;
             });
         });
+    </script>
+
+    <script>
+    function redirectToPage(pageUrl) {
+    window.location.href = pageUrl; // Redirects to the specified page URL
+    }
     </script>
 </body>
 
