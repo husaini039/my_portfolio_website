@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Husaini</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Arapey:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Same styles as the original file */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arapey', serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #000;
+            overflow-x: hidden;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-button {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000000;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 14px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            width: 130px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 12px 16px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: row;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 99;
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .dropdown-menu.show {
+            display: flex;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            border: none;
+            background: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #666;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item.active {
+            color: #000;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .dropdown-item:hover {
+            color: #000;
+            background: rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .call-button {
+            margin-top: 20px;
+            padding: 16px 32px;
+            border: none;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .call-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #333 0%, #000 100%);
+        }
+
+        .about-section {
+            background: rgba(224, 224, 224, 0.15);
+            text-align: center;
+            margin: 30px auto;
+            padding: 50px 30px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 650px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .about-section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-text {
+            font-size: 32px;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .about-text .name {
+            font-weight: 600;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text .description {
+            font-weight: 400;
+            color: #666;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 25px;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .menu-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .about-section {
+                width: 95%;
+                padding: 40px 25px;
+                margin: 20px auto;
+            }
+
+            .about-text {
+                font-size: 24px;
+            }
+
+            .call-button {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Husaini.™</div>
+        <div class="menu-wrapper">
+            <button class="menu-button" id="menuToggle">Menu +</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <button class="dropdown-item active">About Me</button>
+                <button class="dropdown-item">Portfolio</button>
+                <button class="dropdown-item">Journal</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <img src="img/upscaled.jpg" alt="Profile Picture" />
+        <div class="about-text">
+            <span class="name">Hi! I'm Husaini</span><br />
+            <span class="description">I am a passionate developer and creative enthusiast. I enjoy working on various
+                projects, including web development, game design, and more. My goal is to continuously learn and improve
+                while contributing to innovative ideas that have a meaningful impact.</span>
+        </div>
+        <button class="call-button">Contact Me</button>
+    </section>
+
+    <footer>
+        <div class="footer-icons">
+            <a href="https://www.linkedin.com/in/husainishaffin/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/mt.sanii/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="mailto:ahmadshaffin@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://github.com/husaini039" aria-label="Website">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <div class="footer-name">© 2025 Husaini.</div>
+    </footer>
+</body>
+
+</html>
